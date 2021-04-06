@@ -192,7 +192,7 @@ delete-tag:
 docker-otelcol:
 	GOOS=linux $(MAKE) otelcol
 	cp ./bin/otelcol_linux_amd64 ./cmd/otelcol/otelcol
-	docker build -t otelcol ./cmd/otelcol/ --build-arg SMART_AGENT_VERSION_NUMBER=$(SMART_AGENT_VERSION_NUMBER)
+	docker build -t otelcol ./cmd/otelcol/ --build-arg SMART_AGENT_RELEASE_URL=https://github.com/signalfx/signalfx-agent/releases/download/$(SMART_AGENT_RELEASE)/signalfx-agent-$(SMART_AGENT_VERSION_NUMBER).tar.gz
 	rm ./cmd/otelcol/otelcol
 
 .PHONY: binaries-all-sys
