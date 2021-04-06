@@ -42,7 +42,8 @@ endif
 BUILD_X3=-X $(BUILD_INFO_IMPORT_PATH).BuildType=$(BUILD_TYPE)
 BUILD_INFO=-ldflags "${BUILD_X1} ${BUILD_X2} ${BUILD_X3}"
 
-SMART_AGENT_RELEASE=v5.9.1
+SMART_AGENT_VERSION_NUMBER=5.9.1
+SMART_AGENT_RELEASE=v$(SMART_AGENT_VERSION_NUMBER)
 
 ### FUNCTIONS
 
@@ -191,7 +192,7 @@ delete-tag:
 docker-otelcol:
 	GOOS=linux $(MAKE) otelcol
 	cp ./bin/otelcol_linux_amd64 ./cmd/otelcol/otelcol
-	docker build -t otelcol ./cmd/otelcol/
+	docker build -t otelcol ./cmd/otelcol/ --build-arg SMART_AGENT_VERSION_NUMBER=$(SMART_AGENT_VERSION_NUMBER)
 	rm ./cmd/otelcol/otelcol
 
 .PHONY: binaries-all-sys
